@@ -460,6 +460,8 @@ func (r *Route) URL(pairs ...string) (*url.URL, error) {
 	}
 	var scheme, host, path string
 	if r.regexp.host != nil {
+		// Set a default scheme.
+		scheme = "http"
 		if host, err = r.regexp.host.url(values); err != nil {
 			return nil, err
 		}

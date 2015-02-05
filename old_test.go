@@ -368,17 +368,17 @@ var urlBuildingTests = []urlBuildingTest{
 	{
 		route: new(Route).Host("foo.domain.com"),
 		vars:  []string{},
-		url:   "//foo.domain.com",
+		url:   "http://foo.domain.com",
 	},
 	{
 		route: new(Route).Host("{subdomain}.domain.com"),
 		vars:  []string{"subdomain", "bar"},
-		url:   "//bar.domain.com",
+		url:   "http://bar.domain.com",
 	},
 	{
 		route: new(Route).Host("foo.domain.com").Path("/articles"),
 		vars:  []string{},
-		url:   "//foo.domain.com/articles",
+		url:   "http://foo.domain.com/articles",
 	},
 	{
 		route: new(Route).Path("/articles"),
@@ -393,7 +393,7 @@ var urlBuildingTests = []urlBuildingTest{
 	{
 		route: new(Route).Host("{subdomain}.domain.com").Path("/articles/{category}/{id:[0-9]+}"),
 		vars:  []string{"subdomain", "foo", "category", "technology", "id", "42"},
-		url:   "//foo.domain.com/articles/technology/42",
+		url:   "http://foo.domain.com/articles/technology/42",
 	},
 }
 
@@ -566,7 +566,7 @@ func TestSubRouting(t *testing.T) {
 	subrouter := router.NewRoute().Host("www.domain.com").Subrouter()
 	route := subrouter.NewRoute().Path("/products/").Name("products")
 
-	url := "//www.domain.com/products/"
+	url := "http://www.domain.com/products/"
 	request, _ := http.NewRequest("GET", url, nil)
 	var rv RouteMatch
 	ok := router.Match(request, &rv)
